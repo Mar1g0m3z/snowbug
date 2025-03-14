@@ -18,7 +18,8 @@ def snowman(snowman_word):
     wrong_guesses_list = []
 
     while True:
-        print(generate_word_progress_string(snowman_word, correct_letter_guess_statuses))
+        print(generate_word_progress_string(
+            snowman_word, correct_letter_guess_statuses))
         user_letter = get_letter_from_user(
             correct_letter_guess_statuses, wrong_guesses_list)
 
@@ -68,7 +69,7 @@ def get_letter_from_user(correct_letter_guess_statuses, wrong_guesses_list):
             print("You must input a letter!")
         elif len(user_input_string) > 1:
             print("You can only input one letter at a time!")
-        elif (user_input_string in correct_letter_guess_statuses 
+        elif (user_input_string in correct_letter_guess_statuses
                 and correct_letter_guess_statuses[user_input_string]):
             print("You already guessed that letter and it's in the word!")
         elif user_input_string in wrong_guesses_list:
@@ -82,8 +83,10 @@ def get_letter_from_user(correct_letter_guess_statuses, wrong_guesses_list):
 def build_letter_status_dict(snowman_word):
     letter_status_dict = {}
     for letter in snowman_word:
+        print(letter)
         # keep track of any character a player might guess (alphabetic)
-        letter_status_dict[letter] = False
+        if letter.isalpha():
+            letter_status_dict[letter] = False
 
     return letter_status_dict
 
@@ -132,4 +135,5 @@ def print_guesses_remaining(wrong_guesses_list):
     if not wrong_guesses_list:
         return
 
-    print(f"Wrong guesses left: {SNOWMAN_MAX_WRONG_GUESSES - len(wrong_guesses_list)}")
+    print(
+        f"Wrong guesses left: {SNOWMAN_MAX_WRONG_GUESSES - len(wrong_guesses_list)}")
